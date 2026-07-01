@@ -10,4 +10,16 @@ class Pendaftaran extends Model
     use HasUuids;
    
     protected $guarded = ['id'];
+
+    public function alamat() {
+        return $this->belongsTo(Alamat::class);
+    }
+
+    public function orang_tua() {
+        return $this->belongsTo(OrangTua::class);
+    }
+
+    public function data_periodik() {
+        return $this->belongsTo(DataPeriodik::class);
+    }
 }
