@@ -1,0 +1,83 @@
+/* ===== Custom Login Page Styles for PAUD Tunas Bangsa ===== */
+
+/* Clean solid background */
+.fi-simple-layout {
+    background-color: #f8fafc !important;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* Card styling */
+.fi-simple-main {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06) !important;
+    padding: 2rem !important;
+}
+
+/* Hide the default brand logo */
+.fi-simple-header {
+    display: none !important;
+}
+
+/* Form input styling */
+.fi-simple-main .fi-input-wrp {
+    border-radius: 0.5rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.fi-simple-main .fi-input-wrp:focus-within {
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25) !important;
+}
+
+/* Primary button */
+.fi-simple-main .fi-btn-primary {
+    background-color: #f59e0b !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.fi-simple-main .fi-btn-primary:hover {
+    background-color: #d97706 !important;
+}
+
+/* Checkbox */
+.fi-simple-main .fi-checkbox-input:checked {
+    background-color: #f59e0b !important;
+    border-color: #f59e0b !important;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fi-simple-main {
+    animation: fadeIn 0.4s ease-out !important;
+}
+
+/* Fix text and input visibility in dark mode */
+.fi-simple-main label,
+.fi-simple-main .fi-input,
+.fi-simple-main input,
+.fi-simple-main span {
+    color: #1e293b !important;
+}
+
+.fi-simple-main .fi-btn-primary span {
+    color: #ffffff !important;
+}
+
+.fi-simple-main .fi-input-wrp {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.fi-simple-main .fi-checkbox-input {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+}
