@@ -16,7 +16,7 @@
 </head>
 <body class="flex flex-col min-h-screen bg-white text-gray-800">
 
-    <nav class="bg-white shadow-sm py-4" x-data="{ mobileMenuOpen: false }">
+    <nav class="bg-white shadow-sm py-4 relative z-50" x-data="{ mobileMenuOpen: false }">
         <div class="container mx-auto px-6 lg:px-16 flex justify-between items-center">
             
             <!-- Logo -->
