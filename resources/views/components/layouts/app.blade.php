@@ -16,22 +16,45 @@
 </head>
 <body class="flex flex-col min-h-screen bg-white text-gray-800">
 
-    <nav class="bg-white shadow-sm py-4">
+    <nav class="bg-white shadow-sm py-4" x-data="{ mobileMenuOpen: false }">
         <div class="container mx-auto px-6 lg:px-16 flex justify-between items-center">
+            
+            <!-- Logo -->
             <div class="flex items-center gap-3">
                 <img src="{{ asset('assets/images/logo-paud.png') }}" alt="Logo" class="h-10 w-10"> 
             </div>
 
+            <!-- Menu Desktop -->
             <div class="hidden md:flex space-x-8 font-medium">
                 <a href="/" class="{{ request()->is('/') ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-600 transition' }}">Beranda</a>
                 <a href="/tentang-kami" class="{{ request()->is('tentang-kami') ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-600 transition' }}">Tentang Kami</a>
                 <a href="/pendaftaran" class="{{ request()->is('pendaftaran') ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-600 transition' }}">Pendaftaran</a>
             </div>
 
+            <!-- Tombol Hamburger Mobile -->
             <div class="md:hidden">
-                <button class="text-gray-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
                 </button>
+            </div>
+        </div>
+
+        <!-- Dropdown Menu Mobile -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             class="md:hidden bg-gray-50 border-t mt-4 absolute w-full left-0 z-40 shadow-md" 
+             style="display: none;">
+            <div class="flex flex-col px-6 py-4 space-y-4 font-medium">
+                <a href="/" class="{{ request()->is('/') ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-600 transition' }}">Beranda</a>
+                <a href="/tentang-kami" class="{{ request()->is('tentang-kami') ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-600 transition' }}">Tentang Kami</a>
+                <a href="/pendaftaran" class="{{ request()->is('pendaftaran') ? 'text-blue-600 font-semibold' : 'text-gray-600 hover:text-blue-600 transition' }}">Pendaftaran</a>
             </div>
         </div>
     </nav>
