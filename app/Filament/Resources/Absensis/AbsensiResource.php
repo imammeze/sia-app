@@ -25,14 +25,16 @@ class AbsensiResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
+    protected static ?string $modelLabel = 'Data Absensi';
+    protected static ?string $pluralModelLabel = 'Data Absensi';
     public static function getNavigationGroup(): ?string { return 'Akademik'; }
-    public static function getNavigationLabel(): string { return 'Absensi Harian'; }
+    public static function getNavigationLabel(): string { return 'Data Absensi Harian'; }
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Section::make('Form Absensi')->schema([
+                Section::make()->heading('Form Absensi')->schema([
                     Select::make('peserta_didik_id')
                         ->relationship('pesertaDidik', 'nama_lengkap')
                         ->label('Nama Peserta Didik')
@@ -41,6 +43,11 @@ class AbsensiResource extends Resource
                         ->required(),
                     DatePicker::make('tanggal')
                         ->default(now())
+                        ->maxDate(now())
+                        ->validationMessages([
+                            'max' => 'Tanggal tidak valid',
+                            'before_or_equal' => 'Tanggal tidak valid',
+                        ])
                         ->required(),
                     Select::make('status')
                         ->options([
