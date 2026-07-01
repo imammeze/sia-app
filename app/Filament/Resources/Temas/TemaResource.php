@@ -24,6 +24,8 @@ class TemaResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookOpen;
 
+    protected static ?string $modelLabel = 'Data Tema';
+    protected static ?string $pluralModelLabel = 'Data Tema';
     public static function getNavigationGroup(): ?string
     {
         return 'Data Master';
@@ -38,17 +40,23 @@ class TemaResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('Informasi Tema')->schema([
-                    TextInput::make('nama_tema')
-                        ->placeholder('Contoh: Diriku, Keluargaku, Alam Semesta')
-                        ->required()
-                        ->maxLength(255),
-                    TextInput::make('alokasi_waktu')
-                        ->placeholder('Contoh: 3 Minggu')
-                        ->maxLength(255),
-                    Textarea::make('deskripsi')
-                        ->columnSpanFull(),
-                ])->columns(2),
+                Section::make()->heading('Informasi Tema')
+                    ->schema([
+                        TextInput::make('nama_tema')
+                            ->label('Nama Tema')
+                            ->placeholder('Contoh: Diriku, Keluargaku, Alam Semesta')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('alokasi_waktu')
+                            ->label('Alokasi Waktu')
+                            ->placeholder('Contoh: 3 Minggu')
+                            ->maxLength(255),
+                        Textarea::make('deskripsi')
+                            ->label('Deskripsi')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
             ]);
     }
 

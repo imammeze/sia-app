@@ -29,6 +29,11 @@ class StatsOverview extends BaseWidget
                 ->description('Menunggu proses daftar ulang')
                 ->descriptionIcon('heroicon-m-document-text')
                 ->color('warning'),
+
+            Stat::make('Tidak Daftar Ulang', Pendaftaran::where('status', 'batal')->count())
+                ->description('Pendaftar yang batal')
+                ->descriptionIcon('heroicon-m-x-circle')
+                ->color('danger'),
         ];
     }
 }

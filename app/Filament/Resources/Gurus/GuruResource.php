@@ -23,6 +23,8 @@ class GuruResource extends Resource
 {
     protected static ?string $model = Guru::class;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
+    protected static ?string $modelLabel = 'Data Guru';
+    protected static ?string $pluralModelLabel = 'Data Guru';
 
     public static function getNavigationGroup(): ?string
     {
@@ -38,9 +40,13 @@ class GuruResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('Informasi Guru')->schema([
+                Section::make()->heading('Informasi Guru')->schema([
                     TextInput::make('nip')
                         ->label('NIP / NUPTK')
+                        ->rule('regex:/^[0-9]+$/')
+                        ->validationMessages([
+                            'regex' => 'NIP hanya boleh berisi angka',
+                        ])
                         ->unique(ignoreRecord: true)
                         ->maxLength(255),
                     TextInput::make('nama_lengkap')
@@ -55,9 +61,14 @@ class GuruResource extends Resource
                     TextInput::make('no_hp')
                         ->tel()
                         ->maxLength(255),
+                    Select::make('user_id')
+                        ->relationship('user', 'name')
+                        ->label('Akun Pengguna (Tautkan ke User)')
+                        ->searchable()
+                        ->preload(),
                     Textarea::make('alamat')
                         ->columnSpanFull(),
-                ])->columnspanFull(),
+                ])->columns(2)->columnSpanFull(),
             ]);
     }
 
@@ -69,6 +80,7 @@ class GuruResource extends Resource
                 TextColumn::make('nip')->label('NIP')->searchable(),
                 TextColumn::make('jenis_kelamin'),
                 TextColumn::make('no_hp'),
+                TextColumn::make('alamat')->limit(50),
             ])
             ->filters([
                 //

@@ -24,6 +24,8 @@ class KelasResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHomeModern;
 
+    protected static ?string $modelLabel = 'Data Kelas';
+    protected static ?string $pluralModelLabel = 'Data Kelas';
     public static function getNavigationGroup(): ?string
     {
         return 'Data Master';
@@ -47,13 +49,15 @@ class KelasResource extends Resource
                     ->schema([ 
                         TextInput::make('nama_kelas')
                             ->placeholder('Contoh: Kelompok A1 / Bintang')
+                            ->unique(ignoreRecord: true)
+                            ->validationMessages(['unique' => 'Nama Kelas sudah ada'])
                             ->required()
                             ->maxLength(255),
                         Select::make('kelompok_usia')
                             ->options([
-                                '3-4 Tahun' => '3-4 Tahun (Playgroup)',
-                                '4-5 Tahun' => '4-5 Tahun (TK A)',
-                                '5-6 Tahun' => '5-6 Tahun (TK B)',
+                                '3-4 Tahun' => '3-4 Tahun',
+                                '4-5 Tahun' => '4-5 Tahun ',
+                                '5-6 Tahun' => '5-6 Tahun ',
                             ])
                             ->required(),
                         Select::make('guru_id')
