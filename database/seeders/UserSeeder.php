@@ -13,31 +13,31 @@ class UserSeeder extends Seeder
      public function run(): void
     {
         $admin = User::firstOrCreate(
-            ['email' => 'admin@tunasbangsa.com'],
+            ['email' => 'admin@tunasbangsa.sch.id'],
             ['name' => 'Admin', 'password' => bcrypt('admin123')]
         );
         $admin->assignRole('admin');
 
         $admin2 = User::firstOrCreate(
-            ['email' => 'sulistyani@tunasbangsa.com'],
+            ['email' => 'sulistyani@tunasbangsa.sch.id'],
             ['name' => 'Sulistyani', 'password' => bcrypt('sulistyani123')]
         );
-        $admin2->assignRole(['admin', 'guru']);
+        $admin2->assignRole( 'guru');
 
         $kepsek = User::firstOrCreate(
-            ['email' => 'cuciharyati@tunasbangsa.com'],
+            ['email' => 'cuciharyati@tunasbangsa.sch.id'],
             ['name' => 'Cuci Haryati', 'password' => bcrypt('cuciharyati123')]
         );
-        $kepsek->assignRole(['kepala_sekolah', 'guru']);
+        $kepsek->assignRole(['kepala_sekolah']);
 
         $guru = User::firstOrCreate(
-            ['email' => 'akhyani@tunasbangsa.com'],
+            ['email' => 'akhyani@tunasbangsa.sch.id'],
             ['name' => 'Akhyani', 'password' => bcrypt('akhyani123')]
         );
         $guru->assignRole('guru');
         
         $guru1 = User::firstOrCreate(
-            ['email' => 'ika@tunasbangsa.com'],
+            ['email' => 'ika@tunasbangsa.sch.id'],
             ['name' => 'Ika Rusdwuhartanti', 'password' => bcrypt('ika12345')]
         );
         $guru1->assignRole('guru');
