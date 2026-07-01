@@ -55,58 +55,107 @@
         </div>
     </section>
 
-    <section class="bg-blue-600 py-16">
+    <section class="bg-gray-50 py-16">
         <div class="container mx-auto px-6 lg:px-16">
-            <h2 class="text-3xl font-bold text-center text-white mb-12">Guru Kami</h2>
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Guru Kami</h2>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg p-2">
-                    <img src="{{ asset('assets/images/CuciHaryati.jpeg') }}" alt="Cuci Haryati" class="w-full h-72 object-cover rounded-lg bg-gray-200">
-                    <div class="text-center p-4">
-                        <h3 class="font-bold text-gray-800">Cuci Haryati</h3>
-                        <p class="text-xs text-gray-500 mt-1">Kepala Sekolah</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="flex flex-col">
+                    <img src="{{ asset('assets/images/CuciHaryati.jpeg') }}" alt="Cuci Haryati" class="w-full h-80 object-cover rounded-2xl bg-gray-200 shadow-md">
+                    <div class="mt-5 text-left">
+                        <h3 class="font-bold text-xl text-gray-900">Cuci Haryati</h3>
+                        <p class="text-sm text-blue-600 mt-1">Kepala Sekolah</p>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg p-2">
-                    <img src="{{ asset('assets/images/Sulistyani.jpeg') }}" alt="Sulistyani" class="w-full h-72 object-cover rounded-lg bg-gray-200">
-                    <div class="text-center p-4">
-                        <h3 class="font-bold text-gray-800">Sulistyani</h3>
-                        <p class="text-xs text-gray-500 mt-1">Guru</p>
+                <div class="flex flex-col">
+                    <img src="{{ asset('assets/images/Sulistyani.jpeg') }}" alt="Sulistyani" class="w-full h-80 object-cover rounded-2xl bg-gray-200 shadow-md">
+                    <div class="mt-5 text-left">
+                        <h3 class="font-bold text-xl text-gray-900">Sulistyani</h3>
+                        <p class="text-sm text-blue-600 mt-1">Guru</p>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg p-2">
-                    <img src="{{ asset('assets/images/Akhyani.jpeg') }}" alt="Akhyani" class="w-full h-72 object-cover rounded-lg bg-gray-200">
-                    <div class="text-center p-4">
-                        <h3 class="font-bold text-gray-800">Akhyani</h3>
-                        <p class="text-xs text-gray-500 mt-1">Guru</p>
+                <div class="flex flex-col">
+                    <img src="{{ asset('assets/images/Akhyani.jpeg') }}" alt="Akhyani" class="w-full h-80 object-cover rounded-2xl bg-gray-200 shadow-md">
+                    <div class="mt-5 text-left">
+                        <h3 class="font-bold text-xl text-gray-900">Akhyani</h3>
+                        <p class="text-sm text-blue-600 mt-1">Guru</p>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg p-2">
-                    <img src="{{ asset('assets/images/Ika.jpeg') }}" alt="Ika Rusdwuhartanti" class="w-full h-72 object-cover rounded-lg bg-gray-200">
-                    <div class="text-center p-4">
-                        <h3 class="font-bold text-gray-800">Ika Rusdwuhartanti</h3>
-                        <p class="text-xs text-gray-500 mt-1">Guru</p>
+                <div class="flex flex-col">
+                    <img src="{{ asset('assets/images/Ika.jpeg') }}" alt="Ika Rusdwuhartanti" class="w-full h-80 object-cover rounded-2xl bg-gray-200 shadow-md">
+                    <div class="mt-5 text-left">
+                        <h3 class="font-bold text-xl text-gray-900">Ika Rusdwuhartanti</h3>
+                        <p class="text-sm text-blue-600 mt-1">Guru</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="container mx-auto px-6 lg:px-16 py-16">
-        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Galeri</h2>
+    <section class="container mx-auto px-6 lg:px-16 py-16" x-data="{
+        isAnim: false,
+        startX: 0,
+        next() {
+            if(this.isAnim) return;
+            this.isAnim = true;
+            let container = this.$refs.carousel;
+            let itemWidth = container.firstElementChild.offsetWidth + 16; 
+            
+            container.scrollBy({ left: itemWidth, behavior: 'smooth' });
+            
+            setTimeout(() => {
+                container.appendChild(container.firstElementChild);
+                container.scrollLeft -= itemWidth;
+                this.isAnim = false;
+            }, 400); 
+        },
+        prev() {
+            if(this.isAnim) return;
+            this.isAnim = true;
+            let container = this.$refs.carousel;
+            let itemWidth = container.firstElementChild.offsetWidth + 16;
+            
+            container.prepend(container.lastElementChild);
+            container.scrollLeft += itemWidth;
+            
+            setTimeout(() => {
+                container.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+                setTimeout(() => {
+                    this.isAnim = false;
+                }, 400);
+            }, 30);
+        },
+        touchStart(e) {
+            this.startX = e.changedTouches[0].screenX;
+        },
+        touchEnd(e) {
+            let endX = e.changedTouches[0].screenX;
+            if (this.startX - endX > 50) this.next();
+            if (endX - this.startX > 50) this.prev();
+        }
+    }">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-bold text-gray-900">Galeri</h2>
+            <div class="flex gap-2">
+                <button @click="prev" class="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button @click="next" class="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div class="bg-gray-300 rounded-lg aspect-4/3 w-full"></div>
-            <div class="bg-gray-300 rounded-lg aspect-square w-full"></div>
-            <div class="bg-gray-300 rounded-lg md:row-span-2 w-full h-full min-h-62.5"></div>
-            <div class="bg-gray-300 rounded-lg aspect-square w-full"></div>
-            <div class="bg-gray-300 rounded-lg aspect-4/3 w-full"></div>
-            <div class="bg-gray-300 rounded-lg aspect-square w-full"></div>
-            <div class="bg-gray-300 rounded-lg aspect-square w-full"></div>
-            <div class="bg-gray-300 rounded-lg aspect-square w-full hidden md:block"></div>
+        <div x-ref="carousel" @touchstart="touchStart" @touchend="touchEnd" class="flex overflow-hidden gap-4 pb-4 select-none">
+            @for ($i = 1; $i <= 8; $i++)
+            <!-- Item {{ $i }} -->
+            <div class="snap-center shrink-0 w-full md:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)] rounded-xl aspect-4/3 overflow-hidden shadow-md group relative bg-black">
+                <img src="{{ asset('assets/gallery/galeri' . $i . '.jpeg') }}" class="w-full h-full object-cover opacity-60 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110" alt="Galeri {{ $i }}">
+            </div>
+            @endfor
         </div>
     </section>
 
