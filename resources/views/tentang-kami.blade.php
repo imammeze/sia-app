@@ -1,4 +1,4 @@
-<x-layouts.app title="Tentang Kami | PAUD Tunas Bangsa">
+<x-layouts.app title="Tentang Kami | Pos PAUD Tunas Bangsa">
 
     <section class="bg-blue-400 py-20 lg:py-28">
         <div class="container mx-auto px-6 text-center">

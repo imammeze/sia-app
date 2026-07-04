@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'PAUD Tunas Bangsa' }}</title>
+    <title>{{ $title ?? 'Pos PAUD Tunas Bangsa' }}</title>
+    
+    <meta name="description" content="Pos PAUD Tunas Bangsa adalah lembaga pendidikan anak usia dini di Purwokerto Utara, Banyumas. Kami membimbing anak tumbuh cerdas, ceria, dan mandiri.">
+    <meta name="keywords" content="pos paud tunas bangsa, paud tunas bangsa, pos paud, paud purwokerto utara, paud banyumas, pendaftaran paud, sekolah anak usia dini, pendidikan anak">
+    <meta name="author" content="Pos PAUD Tunas Bangsa">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="{{ $title ?? 'Pos PAUD Tunas Bangsa' }}">
+    <meta property="og:description" content="Pos PAUD Tunas Bangsa adalah lembaga pendidikan anak usia dini di Purwokerto Utara, Banyumas. Kami membimbing anak tumbuh cerdas, ceria, dan mandiri.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     

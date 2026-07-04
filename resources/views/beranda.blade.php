@@ -1,4 +1,4 @@
-<x-layouts.app title="Beranda | PAUD Tunas Bangsa">
+<x-layouts.app title="Beranda | Pos PAUD Tunas Bangsa">
     
     <section class="container mx-auto px-6 lg:px-16 py-12 md:py-20 flex flex-col-reverse md:flex-row items-center gap-12">
         <div class="w-full md:w-1/2 flex flex-col items-start text-center md:text-left">

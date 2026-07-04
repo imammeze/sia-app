@@ -1,4 +1,4 @@
-<x-layouts.app title="Pendaftaran | PAUD Tunas Bangsa">
+<x-layouts.app title="Pendaftaran | Pos PAUD Tunas Bangsa">
     <div class="container mx-auto px-6 py-12" x-data="pendaftaranForm()">
         
         @if(session('success'))
