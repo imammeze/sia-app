@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('nama_kelas'); 
             $table->string('kelompok_usia'); 
-            $table->foreignUuid('guru_id')->nullable()->constrained('gurus')->nullOnDelete();
+            $table->foreignUuid('guru_id')->nullable()->constrained('gurus')->restrictOnDelete();
             $table->timestamps();
         });
     }
