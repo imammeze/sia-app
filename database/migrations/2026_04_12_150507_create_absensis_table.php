@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('absensis', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('peserta_didik_id')->constrained('peserta_didiks')->cascadeOnDelete();
+            $table->foreignUuid('peserta_didik_id')->constrained('peserta_didiks')->restrictOnDelete();
             $table->date('tanggal');
             $table->enum('status', ['hadir', 'izin', 'sakit', 'alpa']);
             $table->text('keterangan')->nullable();

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('capaian_pembelajarans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('kategori_capaian_id')->constrained('kategori_capaians')->cascadeOnDelete();
+            $table->foreignUuid('kategori_capaian_id')->constrained('kategori_capaians')->restrictOnDelete();
             $table->text('deskripsi');
             $table->integer('urutan')->default(0);
             $table->timestamps();

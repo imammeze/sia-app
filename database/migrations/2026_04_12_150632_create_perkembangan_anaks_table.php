@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('perkembangan_anaks', function (Blueprint $table) {
             $table->uuid('id')->primary();
             
-            $table->foreignUuid('peserta_didik_id')->constrained('peserta_didiks')->cascadeOnDelete();
-            $table->foreignUuid('guru_id')->constrained('gurus')->cascadeOnDelete();
+            $table->foreignUuid('peserta_didik_id')->constrained('peserta_didiks')->restrictOnDelete();
+            $table->foreignUuid('guru_id')->constrained('gurus')->restrictOnDelete();
             
             $table->string('tahun_ajaran', 20); 
             $table->enum('semester', ['ganjil', 'genap']);

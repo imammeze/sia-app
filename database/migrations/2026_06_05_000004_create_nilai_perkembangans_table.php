@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('nilai_perkembangans', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('perkembangan_anak_id')->constrained('perkembangan_anaks')->cascadeOnDelete();
-            $table->foreignUuid('capaian_pembelajaran_id')->constrained('capaian_pembelajarans')->cascadeOnDelete();
+            $table->foreignUuid('perkembangan_anak_id')->constrained('perkembangan_anaks')->restrictOnDelete();
+            $table->foreignUuid('capaian_pembelajaran_id')->constrained('capaian_pembelajarans')->restrictOnDelete();
             $table->enum('tingkat_capaian', ['BB', 'MB', 'BSH', 'BSB']);
             $table->timestamps();
 
