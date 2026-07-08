@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('berkebutuhan_khusus_ibu')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

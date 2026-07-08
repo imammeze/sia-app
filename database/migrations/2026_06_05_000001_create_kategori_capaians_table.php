@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('judul_capaian')->nullable();
             $table->integer('urutan')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('jumlah_saudara_kandung')->nullable();
             $table->string('jarak_ke_sekolah')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

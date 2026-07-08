@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('jarak_ke_sekolah')->nullable();
             $table->string('waktu_tempuh')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

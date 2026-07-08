@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('capaian_pembelajaran_id')->constrained('capaian_pembelajarans')->restrictOnDelete();
             $table->enum('tingkat_capaian', ['BB', 'MB', 'BSH', 'BSB']);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['perkembangan_anak_id', 'capaian_pembelajaran_id'], 'nilai_perkembangan_unique');
         });

@@ -33,6 +33,7 @@ return new class extends Migration
             $table->foreignUuid('data_periodik_id')->nullable()->constrained('data_periodiks')->nullOnDelete();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

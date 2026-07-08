@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kelompok_usia'); 
             $table->foreignUuid('guru_id')->nullable()->constrained('gurus')->restrictOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

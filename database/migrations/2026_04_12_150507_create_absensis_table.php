@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['hadir', 'izin', 'sakit', 'alpa']);
             $table->text('keterangan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->unique(['peserta_didik_id', 'tanggal']);
         });
     }

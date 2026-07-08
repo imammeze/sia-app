@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('alokasi_waktu')->nullable(); 
             $table->text('deskripsi')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

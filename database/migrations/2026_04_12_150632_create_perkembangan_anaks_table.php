@@ -26,6 +26,7 @@ return new class extends Migration
             $table->json('foto_kegiatan')->nullable();
             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
