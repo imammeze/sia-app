@@ -17,6 +17,10 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class TemaResource extends Resource
 {
@@ -69,14 +73,19 @@ class TemaResource extends Resource
                 TextColumn::make('deskripsi')->limit(50),
             ])
             ->filters([
+                \Filament\Tables\Filters\TrashedFilter::make(),
                 //
             ])
             ->recordActions([
+                RestoreAction::make(),
+                ForceDeleteAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
             ]);
@@ -87,5 +96,13 @@ class TemaResource extends Resource
         return [
             'index' => ManageTemas::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                \Illuminate\Database\Eloquent\SoftDeletingScope::class,
+            ]);
     }
 }

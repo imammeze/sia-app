@@ -36,6 +36,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\HtmlString;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class PerkembanganAnakResource extends Resource
 {
@@ -295,7 +299,12 @@ class PerkembanganAnakResource extends Resource
                     ->label('Jml Penilaian'),
             ])
             ->defaultSort('created_at', 'desc')
+            ->filters([
+                \Filament\Tables\Filters\TrashedFilter::make(),
+            ])
             ->recordActions([
+                RestoreAction::make(),
+                ForceDeleteAction::make(),
                 Action::make('cetak_pdf')
                     ->label('Cetak PDF')
                     ->icon('heroicon-o-document-arrow-down')
@@ -305,7 +314,9 @@ class PerkembanganAnakResource extends Resource
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])]);
+            ->toolbarActions([BulkActionGroup::make([
+                    RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),DeleteBulkAction::make()])]);
     }
 
     public static function getPages(): array
@@ -315,5 +326,13 @@ class PerkembanganAnakResource extends Resource
             'create' => CreatePerkembanganAnak::route('/create'),
             'edit' => EditPerkembanganAnak::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                \Illuminate\Database\Eloquent\SoftDeletingScope::class,
+            ]);
     }
 }

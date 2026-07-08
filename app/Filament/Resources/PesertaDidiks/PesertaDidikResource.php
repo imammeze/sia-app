@@ -24,6 +24,10 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class PesertaDidikResource extends Resource
 {
@@ -138,9 +142,14 @@ class PesertaDidikResource extends Resource
                 TextColumn::make('jenis_kelamin'),
                 TextColumn::make('orang_tua.no_hp')->label('No. Hp Orang Tua / Wali'),
             ])
-            ->filters([])
-            ->recordActions([ViewAction::make(), EditAction::make(), DeleteAction::make()])
-            ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])]);
+            ->filters([
+                \Filament\Tables\Filters\TrashedFilter::make(),])
+            ->recordActions([
+                RestoreAction::make(),
+                ForceDeleteAction::make(),ViewAction::make(), EditAction::make(), DeleteAction::make()])
+            ->toolbarActions([BulkActionGroup::make([
+                    RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),DeleteBulkAction::make()])]);
     }
 
     public static function infolist(Schema $schema): Schema
@@ -222,5 +231,13 @@ class PesertaDidikResource extends Resource
         return [
             'index' => ManagePesertaDidiks::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                \Illuminate\Database\Eloquent\SoftDeletingScope::class,
+            ]);
     }
 }

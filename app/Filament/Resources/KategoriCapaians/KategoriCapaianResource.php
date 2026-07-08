@@ -18,6 +18,10 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class KategoriCapaianResource extends Resource
 {
@@ -93,8 +97,15 @@ class KategoriCapaianResource extends Resource
                     ->label('Jumlah Capaian'),
             ])
             ->defaultSort('urutan', 'asc')
-            ->recordActions([EditAction::make(), DeleteAction::make()])
-            ->toolbarActions([BulkActionGroup::make([DeleteBulkAction::make()])]);
+            ->filters([
+                \Filament\Tables\Filters\TrashedFilter::make(),
+            ])
+            ->recordActions([
+                RestoreAction::make(),
+                ForceDeleteAction::make(),EditAction::make(), DeleteAction::make()])
+            ->toolbarActions([BulkActionGroup::make([
+                    RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),DeleteBulkAction::make()])]);
     }
 
     public static function getPages(): array
@@ -102,5 +113,13 @@ class KategoriCapaianResource extends Resource
         return [
             'index' => ManageKategoriCapaians::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                \Illuminate\Database\Eloquent\SoftDeletingScope::class,
+            ]);
     }
 }

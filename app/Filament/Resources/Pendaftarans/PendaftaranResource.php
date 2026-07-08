@@ -35,6 +35,10 @@ use Filament\Tables\Table;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class PendaftaranResource extends Resource
 {
@@ -213,6 +217,7 @@ class PendaftaranResource extends Resource
                     }),
             ])
             ->filters([
+                \Filament\Tables\Filters\TrashedFilter::make(),
                 SelectFilter::make('status')
                     ->options([
                         'pending' => 'Pending',
@@ -221,6 +226,8 @@ class PendaftaranResource extends Resource
                     ]),
             ])
             ->recordActions([
+                RestoreAction::make(),
+                ForceDeleteAction::make(),
                 Action::make('sudah_daftar_ulang')
                     ->label('Daftar Ulang')
                     ->icon('heroicon-o-check-circle')
@@ -290,6 +297,8 @@ class PendaftaranResource extends Resource
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
             ]);
@@ -387,5 +396,13 @@ class PendaftaranResource extends Resource
     public static function getNavigationLabel(): string
     {
         return 'Data Pendaftaran';
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                \Illuminate\Database\Eloquent\SoftDeletingScope::class,
+            ]);
     }
 }
