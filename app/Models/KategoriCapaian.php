@@ -2,13 +2,22 @@
 
 namespace App\Models;
 
+use App\Traits\RestrictsSoftDeletes;
 use App\Models\CapaianPembelajaran;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class KategoriCapaian extends Model
 {
-    use HasUuids;
+    use RestrictsSoftDeletes;
+
+    protected array $restrictSoftDeletes = [
+        'capaianPembelajaran' => 'Data KategoriCapaian ini tidak bisa dimasukkan ke keranjang sampah karena masih memiliki relasi data capaianPembelajaran.'
+    ];
+
+
+    use HasUuids, SoftDeletes;
     
     protected $guarded = ['id'];
 

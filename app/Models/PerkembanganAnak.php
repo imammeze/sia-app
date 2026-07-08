@@ -2,15 +2,24 @@
 
 namespace App\Models;
 
+use App\Traits\RestrictsSoftDeletes;
 use App\Models\Guru;
 use App\Models\NilaiPerkembangan;
 use App\Models\PesertaDidik;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PerkembanganAnak extends Model
 {
-    use HasUuids;
+    use RestrictsSoftDeletes;
+
+    protected array $restrictSoftDeletes = [
+        'nilaiPerkembangan' => 'Data PerkembanganAnak ini tidak bisa dimasukkan ke keranjang sampah karena masih memiliki relasi data nilaiPerkembangan.'
+    ];
+
+
+    use HasUuids, SoftDeletes;
     
     protected $guarded = ['id'];
 
